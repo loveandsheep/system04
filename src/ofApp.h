@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "arm04Sim.hpp"
+#include "ofxKsmrRPiToL6470.h"
 
 class ofApp : public ofBaseApp{
 
@@ -24,4 +25,9 @@ public:
 	
 	arm04Sim sim;
 	ofEasyCam camera;
+	
+	static const int motorNum = 3;
+	ofxKsmrRPiToL6470 motor;
+	
+	vector<int> motor_pos;
 };
