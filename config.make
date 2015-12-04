@@ -79,7 +79,7 @@
 # TODO: should this be a default setting?
 # PROJECT_LDFLAGS=-Wl,-rpath=./libs
 
-PROJECT_LDFLAGS += -lWiringPi
+PROJECT_LDFLAGS += -lwiringPi
 
 ################################################################################
 # PROJECT DEFINES
