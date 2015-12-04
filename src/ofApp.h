@@ -27,6 +27,7 @@ public:
 	ofEasyCam camera;
 	
 	static const int motorNum = 3;
+	static const int center = 12800;
 	ofxKsmrRPiToL6470 motor;
 	
 	vector<int> motor_pos;

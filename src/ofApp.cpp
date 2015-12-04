@@ -18,8 +18,8 @@ void ofApp::setup(){
 	motor.sendSignal(RPI_L6470_SIG_VOLT_ACC, 0x34);
 	motor.sendSignal(RPI_L6470_SIG_VOLT_DEC, 0x34);
 	motor.sendSignal(RPI_L6470_SIG_VOLT_HOLD, 0x34);
-	motor.sendSignal(RPI_L6470_SIG_ABSPOS, 0);
-	motor.sendSignal(RPI_L6470_SIG_GOTO, 0);
+	motor.sendSignal(RPI_L6470_SIG_ABSPOS, center);
+	motor.sendSignal(RPI_L6470_SIG_GOTO, center);
 	motor.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
 	motor.sendSignal(RPI_L6470_SIG_STEPMODE, 0);
 	
@@ -39,7 +39,7 @@ void ofApp::draw(){
 	{
 		for (int i = 0;i < 3;i++)
 		{
-			motor_pos[i] = ofRandom(60 * 128);
+			motor_pos[i] = center - ofRandom(60 * 128);
 		}
 	}
 	
