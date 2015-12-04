@@ -39,7 +39,7 @@ void ofApp::draw(){
 	{
 		for (int i = 0;i < 3;i++)
 		{
-			motor_pos[i] = ofRandom(200 * 128);
+			motor_pos[i] = ofRandom(60 * 128);
 		}
 	}
 	
