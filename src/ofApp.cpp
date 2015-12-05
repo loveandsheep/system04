@@ -35,7 +35,7 @@ void ofApp::update(){
 	while (receiver.hasWaitingMessages())
 	{
 		ofxOscMessage m;
-		receiver.getNextMessage(m);
+		receiver.getNextMessage(&m);
 		
 		if (m.getAddress() == "/motor")
 		{
