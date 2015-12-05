@@ -32,16 +32,16 @@ void ofApp::update(){
 
 	sim.update();
 	
-	while (receiver.hasWaitingMessages())
-	{
-		ofxOscMessage m;
-		receiver.getNextMessage(m);
-		
-		if (m.getAddress() == "/motor")
-		{
-			motor_pos[m.getArgAsInt32(0)] = center - m.getArgAsInt32(1);
-		}
-	}
+//	while (receiver.hasWaitingMessages())
+//	{
+//		ofxOscMessage m;
+//		receiver.getNextMessage(m);
+//		
+//		if (m.getAddress() == "/motor")
+//		{
+//			motor_pos[m.getArgAsInt32(0)] = center - m.getArgAsInt32(1);
+//		}
+//	}
 }
 
 //--------------------------------------------------------------
