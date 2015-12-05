@@ -24,7 +24,7 @@ void ofApp::setup(){
 	motor.sendSignal(RPI_L6470_SIG_STEPMODE, 0);
 	
 	motor_pos.assign(motorNum, 0);
-	receiver.setup(12400);
+//	receiver.setup(12400);
 }
 
 //--------------------------------------------------------------
