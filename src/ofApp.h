@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "arm04Sim.hpp"
 #include "ofxKsmrRPiToL6470.h"
+#include "ofxOsc.h"
+
 class ofApp : public ofBaseApp{
 
 public:
@@ -31,4 +33,5 @@ public:
 	
 	vector<int> motor_pos;
 	
+	ofxOscReceiver receiver;
 };
