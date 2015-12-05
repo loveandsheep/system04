@@ -24,24 +24,28 @@ void ofApp::setup(){
 	motor.sendSignal(RPI_L6470_SIG_STEPMODE, 0);
 	
 	motor_pos.assign(motorNum, 0);
+	receiver.setup(12400);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
 	sim.update();
+	
+	while (receiver.hasWaitingMessages())
+	{
+		ofxOscMessage m;
+		receiver.getNextMessage(m);
+		
+		if (m.getAddress() == "/motor")
+		{
+			motor_pos[m.getArgAsInt32(0)] = center - m.getArgAsInt32(1);
+		}
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
-	if (ofGetFrameNum() % 60 == 0)
-	{
-		for (int i = 0;i < 3;i++)
-		{
-			motor_pos[i] = center - ofRandom(60 * 128);
-		}
-	}
 	
 	motor.setGo_toMult(motor_pos);
 	
