@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	center = 12800;
+	center = 0;
 	sim.setup();
 	
 	motor.setup(true, motorNum);
@@ -41,7 +41,7 @@ void ofApp::update(){
 		
 		if (m.getAddress() == "/motor")
 		{
-			motor_pos[m.getArgAsInt32(0)] = center - m.getArgAsInt32(1);
+			motor_pos[m.getArgAsInt32(0)] = m.getArgAsInt32(1);
 		}
 	}
 }
