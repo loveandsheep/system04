@@ -99,10 +99,10 @@ void arm04Sim::draw()
 		tip[i]	.draw();
 		plate[i].draw();
 		
-		ofDrawLine(motor[i].getGlobalPosition(),
-				   elbow[i].getGlobalPosition());
-		ofDrawLine(elbow[i].getGlobalPosition(),
-				   tip[i].getGlobalPosition());
+		ofLine(motor[i].getGlobalPosition(),
+			   elbow[i].getGlobalPosition());
+		ofLine(elbow[i].getGlobalPosition(),
+			   tip[i].getGlobalPosition());
 	}
 }
 
