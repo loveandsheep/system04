@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
+	center = 12800;
 	sim.setup();
 	
 	motor.setup(true, motorNum);
