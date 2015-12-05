@@ -23,8 +23,7 @@ void ofApp::setup(){
 	motor.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
 	motor.sendSignal(RPI_L6470_SIG_STEPMODE, 0);
 	
-	motor_pos.assign(motorNum, 0);
-	receiver.setup(12400);
+	motor_pos.assign(motorNum, center);
 }
 
 //--------------------------------------------------------------
@@ -32,15 +31,11 @@ void ofApp::update(){
 
 	sim.update();
 	
-	while (receiver.hasWaitingMessages())
+	if (ofGetFrameNum() % 300 == 0)
 	{
-		ofxOscMessage m;
-		receiver.getNextMessage(&m);
-		
-		if (m.getAddress() == "/motor")
-		{
-			motor_pos[m.getArgAsInt32(0)] = center - m.getArgAsInt32(1);
-		}
+		int rnd = ofRandom(200) * 128;
+		motor_pos[0] = center - rnd;
+		std::cout << "Motor :" << rnd << std::endl;
 	}
 }
 
