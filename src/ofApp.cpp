@@ -33,7 +33,7 @@ void ofApp::update(){
 	
 	if (ofGetFrameNum() % 300 == 0)
 	{
-		int rnd = ofRandom(200) * 128;
+		int rnd = ofRandom(200);
 		motor_pos[0] = center - rnd;
 		std::cout << "Motor :" << rnd << std::endl;
 	}
