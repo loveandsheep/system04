@@ -24,6 +24,8 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 	
+	void exit();
+	
 	arm04Sim sim;
 	ofEasyCam camera;
 	
