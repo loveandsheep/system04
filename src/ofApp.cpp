@@ -45,9 +45,9 @@ void ofApp::update(){
 			
 			sleep(1);
 			motor.enableAllMotor();
-			motor.sendSignal(RPI_L6470_SIG_ACCEL, 0x10);
-			motor.sendSignal(RPI_L6470_SIG_DECEL, 0x10);
-			motor.sendSignal(RPI_L6470_SIG_MAXSPEED, 0x20);
+			motor.sendSignal(RPI_L6470_SIG_ACCEL, 0x03);
+			motor.sendSignal(RPI_L6470_SIG_DECEL, 0x03);
+			motor.sendSignal(RPI_L6470_SIG_MAXSPEED, 0x10);
 			motor.sendSignal(RPI_L6470_SIG_MINSPEED, 0x0);
 			motor.sendSignal(RPI_L6470_SIG_VOLT_RUN, 0x34);
 			motor.sendSignal(RPI_L6470_SIG_VOLT_ACC, 0x34);
