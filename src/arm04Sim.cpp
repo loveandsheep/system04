@@ -94,6 +94,11 @@ void arm04Sim::draw()
 	
 	for (int i = 0;i < 3;i++)
 	{
+		ofPushMatrix();
+		ofTranslate(motor[i].getGlobalPosition());
+		ofDrawBitmapString(ofToString(i) + ":" + ofToString(angle_motor[i]), 0, 0);
+		ofPopMatrix();
+
 		motor[i].draw();
 		elbow[i].draw();
 		tip[i]	.draw();

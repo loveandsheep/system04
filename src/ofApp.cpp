@@ -40,9 +40,9 @@ void ofApp::update(){
 		
 		if (m.getAddress() == "/pos")
 		{
-			sim.work.setGlobalPosition(m.getArgAsInt32(0),
-									   m.getArgAsInt32(1),
-									   m.getArgAsInt32(2));
+			sim.work.setGlobalPosition(m.getArgAsFloat(0),
+									   m.getArgAsFloat(1),
+									   m.getArgAsFloat(2));
 			sim.update();
 			
 			motor_pos[0] = sim.angle_motor[0] * -64.0;
