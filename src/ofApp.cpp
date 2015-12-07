@@ -27,21 +27,28 @@ void ofApp::setup(){
 	motor_pos.assign(motorNum, center);
 	
 	receiver.setup(12400);
+	sim.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
-	sim.update();
 	
 	while (receiver.hasWaitingMessages())
 	{
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
 		
-		if (m.getAddress() == "/motor")
+		if (m.getAddress() == "/pos")
 		{
-			motor_pos[m.getArgAsInt32(0)] = m.getArgAsInt32(1);
+			sim.work.setGlobalPosition(m.getArgAsInt32(0),
+									   m.getArgAsInt32(1),
+									   m.getArgAsInt32(2));
+			sim.update();
+			
+			motor_pos[0] = sim.angle_motor[0] * -64.0;
+			motor_pos[1] = sim.angle_motor[1] * -64.0;
+			motor_pos[2] = sim.angle_motor[2] * -64.0;
+			motor.setGo_toMult(motor_pos);
 		}
 	}
 }
@@ -49,7 +56,6 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	
-	motor.setGo_toMult(motor_pos);
 	
 	ofBackground(0);
 	
