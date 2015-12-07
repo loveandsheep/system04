@@ -23,7 +23,6 @@ public:
 	float radius_motor;
 	float length_elbow;
 	float length_tip;
-	float radius_tip;
 	float radius_work;
 	
 	ofNode axis;
