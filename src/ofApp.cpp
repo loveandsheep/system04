@@ -66,9 +66,9 @@ void ofApp::update(){
 									   m.getArgAsFloat(2));
 			sim.update();
 			
-			motor_pos[0] = sim.angle_motor[0] / 1.8 * -64.0;
-			motor_pos[1] = sim.angle_motor[1] / 1.8 * -64.0;
-			motor_pos[2] = sim.angle_motor[2] / 1.8 * -64.0;
+			motor_pos[0] = sim.angle_motor[0] / 1.8 * -128.0;
+			motor_pos[1] = sim.angle_motor[1] / 1.8 * -128.0;
+			motor_pos[2] = sim.angle_motor[2] / 1.8 * -128.0;
 			motor.setGo_toMult(motor_pos);
 		}
 	}
