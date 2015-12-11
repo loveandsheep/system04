@@ -108,6 +108,7 @@ PROJECT_LDFLAGS += -lwiringPi
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
 #PROJECT_CFLAGS = -D__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1 -D__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2 -D__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4
+PROJECT_CFLAGS += -std=c++11
 
 ################################################################################
 # PROJECT OPTIMIZATION CFLAGS
