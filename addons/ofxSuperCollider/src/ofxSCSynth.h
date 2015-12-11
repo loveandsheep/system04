@@ -14,11 +14,11 @@
 #pragma once
 
 #include <vector>
-#include <unordered_map>
+#include <tr1/unordered_map>
 
 #include "ofxSCNode.h"
 
-typedef std::unordered_map<string, float> dictionary;
+typedef std::tr1::unordered_map<string, float> dictionary;
 
 class ofxSCSynth : public ofxSCNode
 {
