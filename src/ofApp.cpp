@@ -7,6 +7,16 @@ void ofApp::setup(){
 	sim.setup();
 	
 	motor.setup(true, motorNum);
+	resetMotorCommand();
+	
+	motor_pos.assign(motorNum, center);
+	
+	receiver.setup(12400);
+	sim.update();
+}
+
+void ofApp::resetMotorCommand()
+{
 	motor.resetDevice();
 	
 	sleep(1);
@@ -24,10 +34,9 @@ void ofApp::setup(){
 	motor.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
 	motor.sendSignal(RPI_L6470_SIG_STEPMODE, 0);
 	
-	motor_pos.assign(motorNum, center);
+	reflesh = false;
 	
-	receiver.setup(12400);
-	sim.update();
+	posMan.setup();
 }
 
 //--------------------------------------------------------------
@@ -38,51 +47,51 @@ void ofApp::update(){
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
 		
-		if (m.getAddress() == "/reset")
-		{
-			motor.setup(true, motorNum);
-			motor.resetDevice();
-			
-			sleep(1);
-			motor.enableAllMotor();
-			motor.sendSignal(RPI_L6470_SIG_ACCEL, 0x03);
-			motor.sendSignal(RPI_L6470_SIG_DECEL, 0x03);
-			motor.sendSignal(RPI_L6470_SIG_MAXSPEED, 0x10);
-			motor.sendSignal(RPI_L6470_SIG_MINSPEED, 0x0);
-			motor.sendSignal(RPI_L6470_SIG_VOLT_RUN, 0x34);
-			motor.sendSignal(RPI_L6470_SIG_VOLT_ACC, 0x34);
-			motor.sendSignal(RPI_L6470_SIG_VOLT_DEC, 0x34);
-			motor.sendSignal(RPI_L6470_SIG_VOLT_HOLD, 0x34);
-			motor.sendSignal(RPI_L6470_SIG_ABSPOS, center);
-			motor.sendSignal(RPI_L6470_SIG_GOTO, center);
-			motor.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
-			motor.sendSignal(RPI_L6470_SIG_STEPMODE, 0);
-		}
-		
+		if (m.getAddress() == "/reset") resetMotorCommand();
+		if (m.getAddress() == "/manual") manual = m.getArgAsInt(0);
 		if (m.getAddress() == "/pos")
 		{
 			sim.work.setGlobalPosition(m.getArgAsFloat(0),
 									   m.getArgAsFloat(1),
 									   m.getArgAsFloat(2));
-			sim.update();
-			
-			motor_pos[0] = sim.angle_motor[0] / 1.8 * -128.0;
-			motor_pos[1] = sim.angle_motor[1] / 1.8 * -128.0;
-			motor_pos[2] = sim.angle_motor[2] / 1.8 * -128.0;
-			motor.setGo_toMult(motor_pos);
+			reflesh = true;
 		}
 	}
+	
+	sim.update();
+	
+	if (!manual)
+	{
+		
+	}
+	
+	if (reflesh)
+	{
+		reflesh = false;
+		motor_pos[0] = sim.angle_motor[0] / 1.8 * -128.0;
+		motor_pos[1] = sim.angle_motor[1] / 1.8 * -128.0;
+		motor_pos[2] = sim.angle_motor[2] / 1.8 * -128.0;
+		motor.setGo_toMult(motor_pos);
+	}
+	
+	posMan.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	
 	
 	ofBackground(0);
 	
 	camera.begin();
 	sim.draw();
 	camera.end();
+	
+	string info = "Phase :";
+	if (posMan.phase == PHASE_TENSION) info += "Tension";
+	if (posMan.phase == PHASE_ATTENSION) info += "Attension";
+	if (posMan.phase == PHASE_SEARCH) info += "Search";
+	if (posMan.phase == PHASE_SUSTAIN) info += "Sustain";
+	ofDrawBitmapString(info, 50, 50);
 }
 
 void ofApp::exit()
@@ -93,6 +102,10 @@ void ofApp::exit()
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+	if (key == '1') posMan.ev_tension();
+	if (key == '2') posMan.ev_attension();
+	if (key == '3') posMan.ev_search();
+	if (key == '4') posMan.ev_sustain();
 }
 
 //--------------------------------------------------------------

@@ -1,9 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxOsc.h"
+
 #include "arm04Sim.hpp"
 #include "ofxKsmrRPiToL6470.h"
-#include "ofxOsc.h"
+#include "positioner.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -25,13 +27,19 @@ public:
 	void gotMessage(ofMessage msg);
 	
 	void exit();
+	void resetMotorCommand();
 	
 	arm04Sim sim;
 	ofEasyCam camera;
 	
 	static const int motorNum = 3;
+	
 	int center;
+	bool reflesh;
+	bool manual;
+	
 	ofxKsmrRPiToL6470 motor;
+	positioner posMan;
 	
 	vector<int> motor_pos;
 	
