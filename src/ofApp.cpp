@@ -47,6 +47,14 @@ void ofApp::update(){
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
 		
+		if (m.getAddress() == "/handle")
+		{
+			motor.disableAllMotor();
+			motor.enableMotor(m.getArgAsInt32(0));
+			motor.sendSignal(RPI_L6470_SIG_GOTO, m.getArgAsInt32(1));
+			motor.disableAllMotor();
+		}
+		
 		if (m.getAddress() == "/reset") resetMotorCommand();
 		if (m.getAddress() == "/manual") manual = m.getArgAsInt32(0);
 		if (m.getAddress() == "/pos")
