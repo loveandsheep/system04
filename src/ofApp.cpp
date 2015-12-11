@@ -48,7 +48,7 @@ void ofApp::update(){
 		receiver.getNextMessage(&m);
 		
 		if (m.getAddress() == "/reset") resetMotorCommand();
-		if (m.getAddress() == "/manual") manual = m.getArgAsInt(0);
+		if (m.getAddress() == "/manual") manual = m.getArgAsInt32(0);
 		if (m.getAddress() == "/pos")
 		{
 			sim.work.setGlobalPosition(m.getArgAsFloat(0),
