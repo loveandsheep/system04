@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "include/mcp3002.h"

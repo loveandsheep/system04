@@ -12,11 +12,14 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxSuperCollider.h"
+#include "ofxWiringPi.h"
 
 #define PHASE_TENSION 0
 #define PHASE_ATTENSION 1
 #define PHASE_SEARCH 2
 #define PHASE_SUSTAIN 3
+
+#define ADC_SS_PIN 17
 
 class synthObj;
 
@@ -35,6 +38,9 @@ public:
 	void addNode_Pulse();
 	void addNode_whitePerc();
 	
+	int getAnalog(unsigned char ch);
+	
+	void removeNode(string name);
 	void ev_tension();
 	void ev_attension();
 	void ev_search();

@@ -33,6 +33,7 @@ void positioner::update()
 		obj->create();
 		synthes.push_back(obj);
 	}
+
 	
 	switch (phase) {
 		case PHASE_TENSION:
@@ -81,6 +82,34 @@ void positioner::update()
 	
 }
 
+int positioner::getAnalog(unsigned char ch)
+{
+#ifndef TARGET_OSX
+	digitalWrite(ADC_SS_PIN, 0);
+	
+	unsigned char sig = 0x01;
+	unsigned char data[2];
+	
+	data[0] = (ch << 4) | 0x80;
+	data[1] = 0x0;
+	
+	wiringPiSPIDataRW(0, &sig, 1);//スタートビット
+	wiringPiSPIDataRW(0, &data[0], 1);
+	wiringPiSPIDataRW(0, &data[1], 1);
+	
+	int ret = ((data[0] & 0x03) << 8) | data[1];
+
+	digitalWrite(ADC_SS_PIN, 1);
+
+	return ret;
+	
+#else
+	
+	return 0.0;
+	
+#endif
+}
+
 void positioner::ev_tension()
 {
 	for (int i = 0;i < synthes.size();i++) synthes[i]->needRemove = true;
@@ -107,6 +136,22 @@ void positioner::ev_sustain()
 	for (int i = 0;i < synthes.size();i++) synthes[i]->needRemove = true;
 	addNode_whitePerc();
 	phase = PHASE_SUSTAIN;
+}
+
+void positioner::removeNode(string name)
+{
+	vector< ofPtr<synthObj> >::iterator it = synthes.begin();
+	while (it != synthes.end())
+	{
+		if ((*it)->name == name)
+		{
+			it = synthes.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
 }
 
 void positioner::addNode_drone()

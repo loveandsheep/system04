@@ -12,8 +12,8 @@ void arm04Sim::setup()
 {
 	
 	radius_motor = 40.0;
-	length_elbow = 300.0;
-	length_tip = 300.0;
+	length_elbow = 150.0;
+	length_tip = 150.0;
 	
 	radius_work = 40.0;
 	
