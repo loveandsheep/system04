@@ -140,5 +140,5 @@ PROJECT_LDFLAGS += -lwiringPi
 #		(default) PROJECT_CC = (blank)
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
-# PROJECT_CXX = 
+ PROJECT_CXX += -std=c++11
 # PROJECT_CC = 
