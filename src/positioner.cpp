@@ -10,16 +10,16 @@
 
 void positioner::setup()
 {
-	scServer = ofPtr<ofxSCServer>(new ofxSCServer("localhost", 57110));
+	scServer = ofPtr<ofxSCServer>(new ofxSCServer("192.168.2.48", 57110));
 
-#ifndef TARGET_OSX
+
 	ofxOscMessage m;
 	m.setAddress("/g_new");
 	m.addIntArg(1);
 	m.addIntArg(0);//position
-	m.addIntArg(1);//group ID
+	m.addIntArg(0);//group ID
 	scServer->sendMsg(m);
-#endif
+
 //	ev_tension();
 }
 
@@ -27,13 +27,17 @@ void positioner::update()
 {
 	if (ofGetFrameNum() % 600 == 0)
 	{
-		ofPtr<synthObj> obj = ofPtr<synthObj>(new synthObj());
-		obj->setup("s04_test", scServer);
-		obj->setAutoDie(600);
-		obj->create();
-		synthes.push_back(obj);
+//		ofPtr<synthObj> obj = ofPtr<synthObj>(new synthObj());
+//		obj->setup("s04_test", scServer);
+//		obj->setAutoDie(600);
+//		obj->create();
+//		synthes.push_back(obj);
 	}
 
+	if (ofGetFrameNum() % 5 == 0)
+	{
+		cout << getAnalog(0) << endl;
+	}
 	
 	switch (phase) {
 		case PHASE_TENSION:
