@@ -89,7 +89,7 @@ void positioner::update()
 int positioner::getAnalog(unsigned char ch)
 {
 #ifndef TARGET_OSX
-	digitalWrite(ADC_SS_PIN, 1);
+	digitalWrite(ADC_SS_PIN, 0);
 	
 	unsigned char sig = 0x01;
 	unsigned char data[2];
@@ -98,9 +98,7 @@ int positioner::getAnalog(unsigned char ch)
 	data[1] = 0x0;
 	
 	wiringPiSPIDataRW(0, &sig, 1);//スタートビット
-	sleep(1);
 	wiringPiSPIDataRW(0, &data[0], 1);
-	sleep(1);
 	wiringPiSPIDataRW(0, &data[1], 1);
 	
 	cout << "rawData0 :" << int(data[0]) << endl;
@@ -108,7 +106,7 @@ int positioner::getAnalog(unsigned char ch)
 	
 	int ret = ((data[0] & 0x03) << 8) | data[1];
 
-	digitalWrite(ADC_SS_PIN, 0);
+	digitalWrite(ADC_SS_PIN, 1);
 
 	return ret;
 	
