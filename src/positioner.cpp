@@ -21,6 +21,9 @@ void positioner::setup()
 	scServer->sendMsg(m);
 
 //	ev_tension();
+#ifndef TAGET_OSX
+	pinMode(ADC_SS_PIN, OUTPUT);
+#endif
 }
 
 void positioner::update()
