@@ -97,6 +97,9 @@ int positioner::getAnalog(unsigned char ch)
 	data[0] = (ch << 4) | 0x80;
 	data[1] = 0x0;
 	
+	cout << "befData0 :" << int(data[0]) << endl;
+	cout << "befData1 :" << int(data[1]) << endl;
+	
 	wiringPiSPIDataRW(0, &sig, 1);//スタートビット
 	wiringPiSPIDataRW(0, &data[0], 1);
 	wiringPiSPIDataRW(0, &data[1], 1);
