@@ -101,6 +101,9 @@ int positioner::getAnalog(unsigned char ch)
 	wiringPiSPIDataRW(0, &data[0], 1);
 	wiringPiSPIDataRW(0, &data[1], 1);
 	
+	cout << "rawData0 :" << data[0] << endl;
+	cout << "rawData1 :" << data[1] << endl;
+	
 	int ret = ((data[0] & 0x03) << 8) | data[1];
 
 	digitalWrite(ADC_SS_PIN, 1);
