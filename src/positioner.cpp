@@ -89,7 +89,7 @@ void positioner::update()
 int positioner::getAnalog(unsigned char ch)
 {
 #ifndef TARGET_OSX
-	digitalWrite(ADC_SS_PIN, 0);
+	digitalWrite(ADC_SS_PIN, 1);
 	
 	unsigned char sig = 0x01;
 	unsigned char data[2];
@@ -108,7 +108,7 @@ int positioner::getAnalog(unsigned char ch)
 	
 	int ret = ((data[0] & 0x03) << 8) | data[1];
 
-	digitalWrite(ADC_SS_PIN, 1);
+	digitalWrite(ADC_SS_PIN, 0);
 
 	return ret;
 	
