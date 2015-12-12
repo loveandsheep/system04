@@ -36,7 +36,7 @@ void positioner::update()
 
 	if (ofGetFrameNum() % 5 == 0)
 	{
-		cout << getAnalog(0) << endl;
+		cout << getAnalog(ofGetFrameNum() / 5 % 8) << endl;
 	}
 	
 	switch (phase) {
