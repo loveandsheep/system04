@@ -19,7 +19,7 @@
 #define PHASE_SEARCH 2
 #define PHASE_SUSTAIN 3
 
-#define ADC_SS_PIN 17
+#define ADC_SS_PIN 22
 
 class synthObj;
 
