@@ -52,7 +52,6 @@ void ofApp::update(){
 			motor.disableAllMotor();
 			motor.enableMotor(m.getArgAsInt32(0));
 			motor.sendSignal(RPI_L6470_SIG_GOTO, m.getArgAsInt32(1));
-			motor.disableAllMotor();
 		}
 		
 		if (m.getAddress() == "/volt")
@@ -62,7 +61,6 @@ void ofApp::update(){
 			motor.sendSignal(RPI_L6470_SIG_VOLT_ACC, m.getArgAsInt32(0));
 			motor.sendSignal(RPI_L6470_SIG_VOLT_DEC, m.getArgAsInt32(0));
 			motor.sendSignal(RPI_L6470_SIG_VOLT_HOLD, m.getArgAsInt32(0));
-			motor.disableAllMotor();
 		}
 		if (m.getAddress() == "/reset") resetMotorCommand();
 		if (m.getAddress() == "/manual") manual = m.getArgAsInt32(0);
@@ -88,6 +86,7 @@ void ofApp::update(){
 		motor_pos[0] = sim.angle_motor[0] / 1.8 * -128.0;
 		motor_pos[1] = sim.angle_motor[1] / 1.8 * -128.0;
 		motor_pos[2] = sim.angle_motor[2] / 1.8 * -128.0;
+		motor.enableAllMotor();
 		motor.setGo_toMult(motor_pos);
 	}
 	
