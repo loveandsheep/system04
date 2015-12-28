@@ -25,10 +25,10 @@ void ofApp::resetMotorCommand()
 	motor.sendSignal(RPI_L6470_SIG_DECEL, 0x10);
 	motor.sendSignal(RPI_L6470_SIG_MAXSPEED, 0x20);
 	motor.sendSignal(RPI_L6470_SIG_MINSPEED, 0x0);
-	motor.sendSignal(RPI_L6470_SIG_VOLT_RUN, 0x17);
-	motor.sendSignal(RPI_L6470_SIG_VOLT_ACC, 0x17);
-	motor.sendSignal(RPI_L6470_SIG_VOLT_DEC, 0x17);
-	motor.sendSignal(RPI_L6470_SIG_VOLT_HOLD, 0x17);
+	motor.sendSignal(RPI_L6470_SIG_VOLT_RUN, 0x28);
+	motor.sendSignal(RPI_L6470_SIG_VOLT_ACC, 0x28);
+	motor.sendSignal(RPI_L6470_SIG_VOLT_DEC, 0x28);
+	motor.sendSignal(RPI_L6470_SIG_VOLT_HOLD, 0x30);
 	motor.sendSignal(RPI_L6470_SIG_ABSPOS, center);
 	motor.sendSignal(RPI_L6470_SIG_GOTO, center);
 	motor.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
