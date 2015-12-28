@@ -55,6 +55,15 @@ void ofApp::update(){
 			motor.disableAllMotor();
 		}
 		
+		if (m.getAddress() == "/volt")
+		{
+			motor.enableAllMotor();
+			motor.sendSignal(RPI_L6470_SIG_VOLT_RUN, m.getArgAsInt32(0));
+			motor.sendSignal(RPI_L6470_SIG_VOLT_ACC, m.getArgAsInt32(0));
+			motor.sendSignal(RPI_L6470_SIG_VOLT_DEC, m.getArgAsInt32(0));
+			motor.sendSignal(RPI_L6470_SIG_VOLT_HOLD, m.getArgAsInt32(0));
+			motor.disableAllMotor();
+		}
 		if (m.getAddress() == "/reset") resetMotorCommand();
 		if (m.getAddress() == "/manual") manual = m.getArgAsInt32(0);
 		if (m.getAddress() == "/pos")
