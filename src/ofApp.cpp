@@ -54,6 +54,18 @@ void ofApp::update(){
 			motor.sendSignal(RPI_L6470_SIG_GOTO, m.getArgAsInt32(1));
 		}
 		
+		if (m.getAddress() == "/accel")
+		{
+			motor.enableAllMotor();
+			motor.sendSignal(RPI_L6470_SIG_ACCEL, m.getArgAsInt32(0));
+		}
+
+		if (m.getAddress() == "/decel")
+		{
+			motor.enableAllMotor();
+			motor.sendSignal(RPI_L6470_SIG_DECEL, m.getArgAsInt32(0));
+		}
+
 		if (m.getAddress() == "/volt")
 		{
 			motor.enableAllMotor();
