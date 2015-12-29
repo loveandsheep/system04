@@ -10,7 +10,7 @@
 
 void positioner::setup()
 {
-	scServer = ofPtr<ofxSCServer>(new ofxSCServer("192.168.2.48", 57110));
+	scServer = ofPtr<ofxSCServer>(new ofxSCServer("192.168.10.8", 57110));
 
 
 	ofxOscMessage m;
@@ -21,7 +21,7 @@ void positioner::setup()
 	scServer->sendMsg(m);
 
 //	ev_tension();
-#ifndef TAGET_OSX
+#ifndef TARGET_OSX
 	pinMode(ADC_SS_PIN, OUTPUT);
 #endif
 }
