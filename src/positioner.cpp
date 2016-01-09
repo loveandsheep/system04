@@ -10,7 +10,7 @@
 
 void positioner::setup()
 {
-	scServer = ofPtr<ofxSCServer>(new ofxSCServer("localhost", 57110));
+	scServer = ofPtr<ofxSCServer>(new ofxSCServer("127.0.0.1", 57110));
 
 
 	ofxOscMessage m;
