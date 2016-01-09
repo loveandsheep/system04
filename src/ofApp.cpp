@@ -97,8 +97,6 @@ void ofApp::update(){
 		}
 	}
 	
-	sim.update();
-	
 	if (!manual)
 	{
 		if (ofGetFrameNum() % 10 == 0)
@@ -114,6 +112,8 @@ void ofApp::update(){
 			reflesh = true;
 		}
 	}
+	
+	sim.update();
 	
 	if (reflesh)
 	{
