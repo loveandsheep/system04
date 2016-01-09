@@ -13,7 +13,7 @@ void ofApp::setup(){
 	
 	receiver.setup(12400);
 	sim.update();
-	manual = false;
+	manual = true;
 }
 
 void ofApp::resetMotorCommand()
@@ -112,6 +112,15 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	
+	if (ofGetFrameNum() % 30 == 0)
+	{
+		cout << "=== Status ===" << endl;
+		cout << "pos :" << posMan.requestPos << endl;
+		cout << "claibTn :" << posMan.calibAnalog << endl;
+		cout << "tension :" << posMan.currentAnalog << endl;
+		cout << "phase :" << posMan.phase << endl;
+	}
 	
 	ofBackground(0);
 	
