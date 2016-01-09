@@ -44,4 +44,7 @@ public:
 	vector<int> motor_pos;
 	
 	ofxOscReceiver receiver;
+	
+	bool isParent;
+	ofxOscSender child;
 };

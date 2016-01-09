@@ -13,7 +13,13 @@ void ofApp::setup(){
 	
 	receiver.setup(12400);
 	sim.update();
-	manual = true;
+	
+	ofDirectory dir;
+	dir.listDir("parent");
+	
+	isParent = (dir.getFiles().size() > 0);
+	manual = !isParent;
+	child.setup(CHILD_ADDR, 12400);
 }
 
 void ofApp::resetMotorCommand()
@@ -98,6 +104,13 @@ void ofApp::update(){
 		if (ofGetFrameNum() % 10 == 0)
 		{
 			sim.work.setGlobalPosition(posMan.requestPos);
+			ofxOscMessage m;
+			m.setAddress("/pos");
+			m.addIntArg(posMan.remotePos.x);
+			m.addIntArg(posMan.remotePos.y);
+			m.addIntArg(posMan.remotePos.z);
+			child.sendMessage(m);
+			
 			reflesh = true;
 		}
 	}
@@ -121,6 +134,7 @@ void ofApp::draw(){
 	if (ofGetFrameNum() % 5 == 0)
 	{
 		cout << "=== Status ===" << endl;
+		cout << "isParent :" << isParent << endl;
 		cout << "pos :" << posMan.requestPos << endl;
 		cout << "claibTn :" << posMan.calibAnalog << endl;
 		cout << "tension :" << posMan.currentAnalog << endl;

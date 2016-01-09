@@ -14,6 +14,8 @@
 #include "ofxSuperCollider.h"
 #include "ofxWiringPi.h"
 
+#define CHILD_ADDR string("192.168.1.107")
+
 #define PHASE_IDLE -1
 #define PHASE_TENSION 0
 #define PHASE_ATTENSION 1
@@ -57,6 +59,8 @@ public:
 	vector< ofPtr<synthObj> > synthes;
 	
 	ofVec3f requestPos;
+	ofVec3f remotePos;
+	int remoteAnalog;
 	
 	int search_forceCount;
 };

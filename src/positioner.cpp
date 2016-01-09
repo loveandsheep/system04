@@ -10,7 +10,7 @@
 
 void positioner::setup()
 {
-	scServer = ofPtr<ofxSCServer>(new ofxSCServer("192.168.2.50", 57110));
+	scServer = ofPtr<ofxSCServer>(new ofxSCServer(CHILD_ADDR, 57110));
 
 
 	ofxOscMessage m;
@@ -78,9 +78,14 @@ void positioner::update()
 					ev_sustain();
 				}else{
 					search_forceCount++;
+					
 					requestPos.set(ofRandomf() * 50,
 								   ofRandom(-250, -150),
 								   ofRandomf() * 50);
+					remotePos.set(ofRandomf() * 50,
+								  ofRandom(-250, -150),
+								  ofRandomf() * 50);
+					
 					addNode_Pulse();
 					addNode_Pulse();
 					addNode_Pulse();
