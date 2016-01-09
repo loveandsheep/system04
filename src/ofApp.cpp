@@ -106,9 +106,9 @@ void ofApp::update(){
 			sim.work.setGlobalPosition(posMan.requestPos);
 			ofxOscMessage m;
 			m.setAddress("/pos");
-			m.addIntArg(posMan.remotePos.x);
-			m.addIntArg(posMan.remotePos.y);
-			m.addIntArg(posMan.remotePos.z);
+			m.addFloatArg(posMan.remotePos.x);
+			m.addFloatArg(posMan.remotePos.y);
+			m.addFloatArg(posMan.remotePos.z);
 			child.sendMessage(m);
 			
 			reflesh = true;
