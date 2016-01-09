@@ -56,9 +56,12 @@ void positioner::update()
 			}
 			else
 			{
-				if (abs(currentAnalog - calibAnalog) > 5)
+				if (ofGetFrameNum() % 10 == 0)
 				{
-					ev_attension();
+					if (abs(currentAnalog - calibAnalog) > 5)
+					{
+						ev_attension();
+					}					
 				}
 			}
 			break;
