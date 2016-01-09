@@ -37,7 +37,7 @@ public:
 	int center;
 	bool reflesh;
 	bool manual;
-	
+		
 	ofxKsmrRPiToL6470 motor;
 	positioner posMan;
 	

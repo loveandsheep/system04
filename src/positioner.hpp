@@ -14,6 +14,7 @@
 #include "ofxSuperCollider.h"
 #include "ofxWiringPi.h"
 
+#define PHASE_IDLE -1
 #define PHASE_TENSION 0
 #define PHASE_ATTENSION 1
 #define PHASE_SEARCH 2
@@ -49,8 +50,13 @@ public:
 	int phase;
 	float tension;
 	
+	int calibAnalog;
+	int currentAnalog;
+	
 	ofPtr<ofxSCServer> scServer;
 	vector< ofPtr<synthObj> > synthes;
+	
+	ofVec3f requestPos;
 };
 
 class synthObj{

@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 732.0, 79.0, 1120.0, 775.0 ],
+		"rect" : [ 154.0, 390.0, 1120.0, 775.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -45,7 +45,6 @@
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 768.0, 199.5, 50.0, 22.0 ],
-					"presentation_rect" : [ 860.5, 180.5, 0.0, 0.0 ],
 					"style" : ""
 				}
 
@@ -59,7 +58,6 @@
 					"outlettype" : [ "" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 768.0, 46.0, 27.0, 123.0 ],
-					"presentation_rect" : [ 773.5, 74.5, 0.0, 0.0 ],
 					"size" : 20.0,
 					"style" : ""
 				}
@@ -100,7 +98,7 @@
 					"outlettype" : [ "int" ],
 					"patching_rect" : [ 439.5, 199.5, 75.0, 22.0 ],
 					"style" : "",
-					"text" : "random 230"
+					"text" : "random 180"
 				}
 
 			}
@@ -215,8 +213,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 205.0, 506.0, 67.0, 22.0 ],
-					"presentation_rect" : [ 142.0, 558.0, 0.0, 0.0 ],
+					"patching_rect" : [ 81.0, 311.5, 67.0, 22.0 ],
 					"style" : "",
 					"text" : "s oscSend"
 				}
@@ -230,7 +227,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 81.0, 701.0, 167.0, 22.0 ],
 					"style" : "",
-					"text" : "udpsend 192.168.10.7 12400"
+					"text" : "udpsend 192.168.2.50 12400"
 				}
 
 			}
@@ -483,6 +480,7 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-44",
+					"int" : 1,
 					"maxclass" : "gswitch",
 					"numinlets" : 3,
 					"numoutlets" : 1,
@@ -736,9 +734,9 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 205.0, 434.0, 114.0, 22.0 ],
+					"patching_rect" : [ 81.0, 239.5, 114.0, 22.0 ],
 					"style" : "",
-					"text" : "0. -101. 0."
+					"text" : "0. -214. 0."
 				}
 
 			}
@@ -762,7 +760,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 205.0, 471.0, 81.0, 22.0 ],
+					"patching_rect" : [ 81.0, 276.5, 81.0, 22.0 ],
 					"style" : "",
 					"text" : "prepend /pos"
 				}
@@ -776,7 +774,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 81.0, 671.0, 167.0, 22.0 ],
 					"style" : "",
-					"text" : "udpsend 192.168.10.8 12400"
+					"text" : "udpsend 192.168.2.48 12400"
 				}
 
 			}

@@ -10,7 +10,7 @@
 
 void positioner::setup()
 {
-	scServer = ofPtr<ofxSCServer>(new ofxSCServer("192.168.10.8", 57110));
+	scServer = ofPtr<ofxSCServer>(new ofxSCServer("192.168.2.50", 57110));
 
 
 	ofxOscMessage m;
@@ -20,10 +20,16 @@ void positioner::setup()
 	m.addIntArg(0);//group ID
 	scServer->sendMsg(m);
 
-//	ev_tension();
+	calibAnalog = 900;
+	phase = PHASE_TENSION;
+
+	//	ev_tension();
 #ifndef TARGET_OSX
 	pinMode(ADC_SS_PIN, OUTPUT);
 #endif
+	
+	calibAnalog = getAnalog(7);
+	requestPos.set(0, -300, 0);
 }
 
 void positioner::update()
@@ -37,14 +43,18 @@ void positioner::update()
 //		synthes.push_back(obj);
 	}
 
-	if (ofGetFrameNum() % 5 == 0)
+	if (ofGetFrameNum() % 3 == 0)
 	{
+		currentAnalog = getAnalog(7);
 		cout << getAnalog(7) << endl;
 	}
 	
 	switch (phase) {
 		case PHASE_TENSION:
-			
+			if (abs(currentAnalog - calibAnalog) > 3)
+			{
+				ev_attension();
+			}
 			break;
 			
 			
@@ -52,13 +62,20 @@ void positioner::update()
 			if (synthes.size() == 0) ev_search();
 			break;
 			
-			
 		case PHASE_SEARCH:
 			if (ofGetFrameNum() % 120 == 0)
 			{
-				addNode_Pulse();
-				addNode_Pulse();
-				addNode_Pulse();
+				if (abs(currentAnalog - calibAnalog) < 3)
+				{
+					ev_sustain();
+				}else{
+					requestPos.set(ofRandomf() * 50,
+								   ofRandom(-250, -150),
+								   ofRandomf() * 50);
+					addNode_Pulse();
+					addNode_Pulse();
+					addNode_Pulse();
+				}
 			}
 			break;
 			

@@ -13,6 +13,7 @@ void ofApp::setup(){
 	
 	receiver.setup(12400);
 	sim.update();
+	manual = false;
 }
 
 void ofApp::resetMotorCommand()
@@ -89,7 +90,11 @@ void ofApp::update(){
 	
 	if (!manual)
 	{
-		
+		if (ofGetFrameNum() % 10 == 0)
+		{
+			sim.work.setGlobalPosition(posMan.requestPos);
+			reflesh = true;
+		}
 	}
 	
 	if (reflesh)
