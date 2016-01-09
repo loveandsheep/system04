@@ -58,7 +58,7 @@ public:
 	
 	ofVec3f requestPos;
 	
-	int search_forceCount = 0;
+	int search_forceCount;
 };
 
 class synthObj{

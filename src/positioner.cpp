@@ -27,7 +27,7 @@ void positioner::setup()
 #ifndef TARGET_OSX
 	pinMode(ADC_SS_PIN, OUTPUT);
 #endif
-	
+
 	calibAnalog = getAnalog(7);
 	requestPos.set(0, -300, 0);
 }
