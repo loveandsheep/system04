@@ -30,6 +30,7 @@ void positioner::setup()
 
 	calibAnalog = getAnalog(7);
 	requestPos.set(0, -300, 0);
+	analog_smooth = 0.0;
 }
 
 void positioner::update()
@@ -48,26 +49,33 @@ void positioner::update()
 		currentAnalog = getAnalog(7);
 	}
 	
+	analog_smooth += (currentAnalog - analog_smooth) / 3.0;
+	
 	switch (phase) {
 		case PHASE_TENSION:
+			tension_time++;
 			if (calibAnalog < 100)//アナログ値が100を下回る場合キャリブレーションを続ける
 			{
 				calibAnalog = getAnalog(7);
+				analog_smooth = calibAnalog;
 			}
 			else
 			{
-				if (ofGetFrameNum() % 10 == 0)
+				if ((ofGetFrameNum() % 10 == 0) &&
+					(abs(analog_smooth - calibAnalog) > 5) &&
+					(tension_time > 500))
 				{
-					if (abs(currentAnalog - calibAnalog) > 5)
-					{
-						ev_attension();
-					}					
+					ev_attension();
 				}
 			}
+	
 			break;
 			
 			
 		case PHASE_ATTENSION:
+			tension_time = 0;
+			requestPos.set(0, -200, 0);
+			remotePos.set(0, -200, 0);
 			if (synthes.size() == 0) ev_search();
 			search_forceCount = 0;
 			break;

@@ -54,6 +54,7 @@ public:
 	
 	int calibAnalog;
 	int currentAnalog;
+	float analog_smooth;
 	
 	ofPtr<ofxSCServer> scServer;
 	vector< ofPtr<synthObj> > synthes;
@@ -63,6 +64,7 @@ public:
 	int remoteAnalog;
 	
 	int search_forceCount;
+	int tension_time;
 };
 
 class synthObj{
