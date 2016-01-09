@@ -57,6 +57,8 @@ public:
 	vector< ofPtr<synthObj> > synthes;
 	
 	ofVec3f requestPos;
+	
+	int search_forceCount = 0;
 };
 
 class synthObj{

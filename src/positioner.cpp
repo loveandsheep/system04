@@ -66,15 +66,18 @@ void positioner::update()
 			
 		case PHASE_ATTENSION:
 			if (synthes.size() == 0) ev_search();
+			search_forceCount = 0;
 			break;
 			
 		case PHASE_SEARCH:
 			if (ofGetFrameNum() % 120 == 0)
 			{
-				if (abs(currentAnalog - calibAnalog) < 2)
+				if ((abs(currentAnalog - calibAnalog) < 2) &&
+					(search_forceCount > 5))
 				{
 					ev_sustain();
 				}else{
+					search_forceCount++;
 					requestPos.set(ofRandomf() * 50,
 								   ofRandom(-250, -150),
 								   ofRandomf() * 50);
