@@ -95,7 +95,7 @@ void ofApp::update(){
 	
 	if (!manual)
 	{
-		if (ofGetFrameNum() % 10 == 0)
+		if (ofGetFrameNum() % 3 == 0)
 		{
 			sim.work.setGlobalPosition(posMan.requestPos);
 			reflesh = true;
