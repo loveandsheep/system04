@@ -56,7 +56,7 @@ void positioner::update()
 			}
 			else
 			{
-				if (abs(currentAnalog - calibAnalog) > 3)
+				if (abs(currentAnalog - calibAnalog) > 5)
 				{
 					ev_attension();
 				}
