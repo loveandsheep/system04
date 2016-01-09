@@ -50,9 +50,16 @@ void positioner::update()
 	
 	switch (phase) {
 		case PHASE_TENSION:
-			if (abs(currentAnalog - calibAnalog) > 3)
+			if (calibAnalog < 100)//アナログ値が100を下回る場合キャリブレーションを続ける
 			{
-				ev_attension();
+				calibAnalog = getAnalog(7);
+			}
+			else
+			{
+				if (abs(currentAnalog - calibAnalog) > 3)
+				{
+					ev_attension();
+				}
 			}
 			break;
 			

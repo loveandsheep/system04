@@ -48,6 +48,11 @@ void ofApp::update(){
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
 		
+		if (m.getAddress() == "/calib")
+		{
+			posMan.calibAnalog = posMan.getAnalog(7);
+		}
+		
 		if (m.getAddress() == "/handle")
 		{
 			motor.disableAllMotor();
