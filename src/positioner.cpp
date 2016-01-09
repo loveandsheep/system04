@@ -71,7 +71,7 @@ void positioner::update()
 		case PHASE_SEARCH:
 			if (ofGetFrameNum() % 120 == 0)
 			{
-				if (abs(currentAnalog - calibAnalog) < 3)
+				if (abs(currentAnalog - calibAnalog) < 2)
 				{
 					ev_sustain();
 				}else{
