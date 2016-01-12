@@ -35,6 +35,11 @@ void positioner::setup()
 
 void positioner::update()
 {
+	noiseVal = ofSignedNoise(analog_smooth / 100.0,
+							 currentMotor[0] / 100.0,
+							 currentMotor[1] / 100.0,
+							 currentMotor[2] / 100.0) + 0.5;
+	
 	if (ofGetFrameNum() % 600 == 0)
 	{
 //		ofPtr<synthObj> obj = ofPtr<synthObj>(new synthObj());
@@ -154,7 +159,7 @@ int positioner::getAnalog(unsigned char ch)
 	
 #else
 	
-	return 824.0;
+	return (ofSignedNoise(ofGetFrameNum() / 100.0)) * 30.0 + 900;
 	
 #endif
 }
@@ -207,7 +212,7 @@ void positioner::addNode_drone()
 {
 	ofPtr<synthObj> obj = ofPtr<synthObj>(new synthObj());
 	obj->setup("s04_drone", scServer);
-	obj->synth->set("freq", ofRandom(60, 100));
+	obj->synth->set("freq", ofMap(noiseVal, 0.0, 1.0, 60, 100));
 	obj->create();
 	synthes.push_back(obj);
 }
@@ -216,7 +221,7 @@ void positioner::addNode_Pulse()
 {
 	ofPtr<synthObj> obj = ofPtr<synthObj>(new synthObj());
 	obj->setup("s04_Pulse", scServer);
-	obj->synth->set("freq", ofRandom(8000, 18000));
+	obj->synth->set("freq", ofMap(noiseVal, 0.0, 1.0, 8000, 18000));
 	obj->setAutoDie(120);
 	obj->create();
 	synthes.push_back(obj);
@@ -226,7 +231,7 @@ void positioner::addNode_tension()
 {
 	ofPtr<synthObj> obj = ofPtr<synthObj>(new synthObj());
 	obj->setup("s04_Pulse", scServer);
-	obj->synth->set("freq", ofRandom(400, 24000));
+	obj->synth->set("freq", ofMap(noiseVal, 0.0, 1.0, 400, 24000));
 	obj->create();
 	synthes.push_back(obj);
 }

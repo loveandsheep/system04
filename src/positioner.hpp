@@ -65,6 +65,9 @@ public:
 	
 	int search_forceCount;
 	int tension_time;
+	
+	float noiseVal;
+	float currentMotor[3];
 };
 
 class synthObj{

@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 1349.0, 79.0, 490.0, 673.0 ],
+		"rect" : [ 1061.0, 79.0, 821.0, 690.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -37,6 +37,21 @@
 		"style" : "",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"floatoutput" : 1,
+					"id" : "obj-92",
+					"maxclass" : "slider",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 438.0, 86.0, 47.0, 129.0 ],
+					"size" : 1.0,
+					"style" : ""
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontsize" : 24.0,
 					"id" : "obj-91",
@@ -349,12 +364,12 @@
 				"box" : 				{
 					"id" : "obj-76",
 					"maxclass" : "newobj",
-					"numinlets" : 7,
-					"numoutlets" : 7,
-					"outlettype" : [ "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 38.0, 55.0, 374.0, 22.0 ],
+					"numinlets" : 8,
+					"numoutlets" : 8,
+					"outlettype" : [ "", "", "", "", "", "", "", "" ],
+					"patching_rect" : [ 38.0, 55.0, 429.0, 22.0 ],
 					"style" : "",
-					"text" : "route /log/parent /log/pos /log/calib /log/tension /log/phase /log/motor"
+					"text" : "route /log/parent /log/pos /log/calib /log/tension /log/phase /log/motor /log/noise"
 				}
 
 			}
@@ -653,6 +668,16 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-76", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-92", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 398.928558, 81.0, 447.5, 81.0 ],
+					"source" : [ "obj-76", 6 ]
 				}
 
 			}

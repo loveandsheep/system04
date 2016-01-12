@@ -22,7 +22,7 @@ void ofApp::setup(){
 	manual = !isParent;
 	child.setup(CHILD_ADDR, 12400);
 	
-	logger.setup("192.168.2.124", isParent ? 12800 : 12700);
+	logger.setup("localhost", isParent ? 12800 : 12700);
 }
 
 void ofApp::resetMotorCommand()
@@ -106,12 +106,15 @@ void ofApp::update(){
 		{
 			sim.work.setGlobalPosition(posMan.requestPos);
 
-			ofxOscMessage m;
-			m.setAddress("/pos");
-			m.addFloatArg(posMan.remotePos.x);
-			m.addFloatArg(posMan.remotePos.y);
-			m.addFloatArg(posMan.remotePos.z);
-			child.sendMessage(m);
+			if (isParent)
+			{
+				ofxOscMessage m;
+				m.setAddress("/pos");
+				m.addFloatArg(posMan.remotePos.x);
+				m.addFloatArg(posMan.remotePos.y);
+				m.addFloatArg(posMan.remotePos.z);
+				child.sendMessage(m);				
+			}
 			
 			reflesh = true;
 		}
@@ -127,6 +130,10 @@ void ofApp::update(){
 		motor_pos[2] = sim.angle_motor[2] / 1.8 * -128.0;
 		motor.enableAllMotor();
 		motor.setGo_toMult(motor_pos);
+		
+		for (int i = 0;i < 3;i++)
+			posMan.currentMotor[i] = motor_pos[i];
+		
 	}
 	
 	posMan.update();
@@ -140,8 +147,9 @@ void ofApp::draw(){
 		sendLog("/log/parent", isParent);
 		sendLog("/log/pos", posMan.requestPos);
 		sendLog("/log/calib", posMan.calibAnalog);
-		sendLog("/log/tension", posMan.currentAnalog);
+		sendLog("/log/tension", posMan.analog_smooth);
 		sendLog("/log/phase", posMan.phase);
+		sendLog("/log/noise", posMan.noiseVal);
 		
 		ofVec3f mv = ofVec3f(motor_pos[0], motor_pos[1], motor_pos[2]);
 		sendLog("/log/motor", mv);
@@ -154,10 +162,10 @@ void ofApp::draw(){
 	camera.end();
 	
 	string info = "Phase :";
-	if (posMan.phase == PHASE_TENSION) info += "Tension";
-	if (posMan.phase == PHASE_ATTENSION) info += "Attension";
-	if (posMan.phase == PHASE_SEARCH) info += "Search";
-	if (posMan.phase == PHASE_SUSTAIN) info += "Sustain";
+	if (posMan.phase == PHASE_TENSION)		info += "Tension";
+	if (posMan.phase == PHASE_ATTENSION)	info += "Attension";
+	if (posMan.phase == PHASE_SEARCH)		info += "Search";
+	if (posMan.phase == PHASE_SUSTAIN)		info += "Sustain";
 	ofDrawBitmapString(info, 50, 50);
 }
 
