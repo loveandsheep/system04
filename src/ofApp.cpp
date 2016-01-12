@@ -22,7 +22,7 @@ void ofApp::setup(){
 	manual = !isParent;
 	child.setup(CHILD_ADDR, 12400);
 	
-	logger.setup("localhost", isParent ? 12800 : 12700);
+	logger.setup("Cotswold.local", isParent ? 12800 : 12700);
 }
 
 void ofApp::resetMotorCommand()

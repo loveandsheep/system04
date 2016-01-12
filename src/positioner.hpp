@@ -14,7 +14,7 @@
 #include "ofxSuperCollider.h"
 #include "ofxWiringPi.h"
 
-#define CHILD_ADDR string("192.168.1.107")
+#define CHILD_ADDR string("sys04c.local")
 
 #define PHASE_IDLE -1
 #define PHASE_TENSION 0
