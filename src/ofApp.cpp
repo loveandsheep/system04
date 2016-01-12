@@ -29,7 +29,7 @@ void ofApp::resetMotorCommand()
 {
 	motor.resetDevice();
 	
-	sleep(1);
+	sleep(6);
 	motor.enableAllMotor();
 	motor.sendSignal(RPI_L6470_SIG_ACCEL, 0x03);
 	motor.sendSignal(RPI_L6470_SIG_DECEL, 0x03);
