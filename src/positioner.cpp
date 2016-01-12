@@ -29,6 +29,7 @@ void positioner::setup()
 #endif
 
 	calibAnalog = getAnalog(7);
+	remotePos.set(0, -300, 0);
 	requestPos.set(0, -300, 0);
 	analog_smooth = 0.0;
 }
