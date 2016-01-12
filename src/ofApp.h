@@ -46,5 +46,25 @@ public:
 	ofxOscReceiver receiver;
 	
 	bool isParent;
+	
 	ofxOscSender child;
+	ofxOscSender logger;
+	
+	void sendLog(string address, ofVec3f val)
+	{
+		ofxOscMessage m;
+		m.setAddress(address);
+		m.addFloatArg(val.x);
+		m.addFloatArg(val.y);
+		m.addFloatArg(val.z);
+		logger.sendMessage(m);
+	}
+	
+	void sendLog(string address, float val)
+	{
+		ofxOscMessage m;
+		m.setAddress(address);
+		m.addFloatArg(val);
+		logger.sendMessage(m);
+	}
 };

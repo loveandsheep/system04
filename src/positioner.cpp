@@ -154,7 +154,7 @@ int positioner::getAnalog(unsigned char ch)
 	
 #else
 	
-	return 0.0;
+	return 824.0;
 	
 #endif
 }

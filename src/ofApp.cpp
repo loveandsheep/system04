@@ -12,6 +12,7 @@ void ofApp::setup(){
 	motor_pos.assign(motorNum, center);
 	
 	receiver.setup(12400);
+	sim.work.setGlobalPosition(0, -300, 0);
 	sim.update();
 	
 	ofDirectory dir;
@@ -20,6 +21,8 @@ void ofApp::setup(){
 	isParent = (dir.getFiles().size() > 0);
 	manual = !isParent;
 	child.setup(CHILD_ADDR, 12400);
+	
+	logger.setup("192.168.2.124", isParent ? 12800 : 12700);
 }
 
 void ofApp::resetMotorCommand()
@@ -99,9 +102,10 @@ void ofApp::update(){
 	
 	if (!manual)
 	{
-		if (ofGetFrameNum() % 10 == 0)
+		if (ofGetFrameNum() % 20 == 0)
 		{
 			sim.work.setGlobalPosition(posMan.requestPos);
+
 			ofxOscMessage m;
 			m.setAddress("/pos");
 			m.addFloatArg(posMan.remotePos.x);
@@ -114,7 +118,7 @@ void ofApp::update(){
 	}
 	
 	sim.update();
-	
+
 	if (reflesh)
 	{
 		reflesh = false;
@@ -133,12 +137,14 @@ void ofApp::draw(){
 	
 	if (ofGetFrameNum() % 5 == 0)
 	{
-		cout << "=== Status ===" << endl;
-		cout << "isParent :" << isParent << endl;
-		cout << "pos :" << posMan.requestPos << endl;
-		cout << "claibTn :" << posMan.calibAnalog << endl;
-		cout << "tension :" << posMan.currentAnalog << endl;
-		cout << "phase :" << posMan.phase << endl;
+		sendLog("/log/parent", isParent);
+		sendLog("/log/pos", posMan.requestPos);
+		sendLog("/log/calib", posMan.calibAnalog);
+		sendLog("/log/tension", posMan.currentAnalog);
+		sendLog("/log/phase", posMan.phase);
+		
+		ofVec3f mv = ofVec3f(motor_pos[0], motor_pos[1], motor_pos[2]);
+		sendLog("/log/motor", mv);
 	}
 	
 	ofBackground(0);
