@@ -172,6 +172,7 @@ void ofApp::draw(){
 void ofApp::exit()
 {
 	motor.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
+	motor.resetDevice();
 }
 
 //--------------------------------------------------------------
