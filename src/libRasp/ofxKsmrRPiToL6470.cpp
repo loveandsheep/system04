@@ -50,7 +50,7 @@ void ofxKsmrRPiToL6470::setup(bool callGPIOSetup, int numMotor)
 	numBits[RPI_L6470_SIG_RUN_INV]	= 20;
 	numBits[RPI_L6470_SIG_STOP_HARD]= 0;
 	numBits[RPI_L6470_SIG_STOP_SOFT]= 0;
-	verbose = true;
+	verbose = false;
 	
 }
 
