@@ -11,7 +11,7 @@
 void ofxKsmrRPiToL6470::setup(bool callGPIOSetup, int numMotor)
 {
 #ifndef TARGET_OSX
-	int speed = 5000;
+	int speed = 500000;
 	if ((wiringPiSPISetup (SPI_CHANNEL, speed)) < 0) {
 		printf("wiringPiSPISetup error \n");
 	}
@@ -23,6 +23,8 @@ void ofxKsmrRPiToL6470::setup(bool callGPIOSetup, int numMotor)
 	pinMode(RPI_L6470_SS_PIN, OUTPUT);
 	digitalWrite(RPI_L6470_SS_PIN, 1);
 	
+	
+	pullUpDnControl(RPI_L6470_SS_PIN, PUD_UP);
 	pullUpDnControl( 9, PUD_UP);
 	pullUpDnControl(10, PUD_UP);
 	pullUpDnControl(11, PUD_UP);
