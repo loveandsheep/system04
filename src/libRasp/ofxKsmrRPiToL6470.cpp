@@ -141,9 +141,9 @@ void ofxKsmrRPiToL6470::spiOpen()
 {
 #ifndef TARGET_OSX
 	digitalWrite(RPI_L6470_SS_PIN, 0);
+	usleep(10000);
 #endif
 	if (verbose) std::cout << "===Open===" << ofGetFrameNum() << std::endl;
-	usleep(5000);
 }
 
 void ofxKsmrRPiToL6470::sendSpi(unsigned char sig)
@@ -158,6 +158,7 @@ void ofxKsmrRPiToL6470::sendSpi(unsigned char sig)
 void ofxKsmrRPiToL6470::spiClose()
 {
 #ifndef TARGET_OSX
+	usleep(10000);
 	digitalWrite(RPI_L6470_SS_PIN, 1);
 #endif
 	if (verbose) std::cout << "===Close===" << std::endl;
