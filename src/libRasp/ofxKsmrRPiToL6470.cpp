@@ -143,6 +143,7 @@ void ofxKsmrRPiToL6470::spiOpen()
 	digitalWrite(RPI_L6470_SS_PIN, 0);
 #endif
 	if (verbose) std::cout << "===Open===" << ofGetFrameNum() << std::endl;
+	usleep(100);
 }
 
 void ofxKsmrRPiToL6470::sendSpi(unsigned char sig)
