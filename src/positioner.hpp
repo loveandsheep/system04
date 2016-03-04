@@ -15,6 +15,7 @@
 #include "ofxWiringPi.h"
 
 #define CHILD_ADDR string("sys04c.local")
+#define EMERGE_BUTTON_PIN 21
 
 #define PHASE_IDLE -1
 #define PHASE_TENSION 0

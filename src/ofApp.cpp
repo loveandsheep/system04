@@ -100,6 +100,12 @@ void ofApp::update(){
 									   m.getArgAsFloat(2));
 			reflesh = true;
 		}
+		
+		if (m.getAddress() == "/emergency")
+		{
+			motor.resetDevice();
+			system("sudo shutdown -h now");
+		}
 	}
 	
 	if (!manual)
@@ -137,6 +143,17 @@ void ofApp::update(){
 			posMan.currentMotor[i] = motor_pos[i];
 		
 	}
+#ifndef TARGET_OSX
+	if (digitalRead(EMERGE_BUTTON_PIN) == LOW)
+	{
+		ofxOscMessage m;
+		m.setAddress("/emergency");
+		child.sendMessage(m);
+		
+		motor.resetDevice();
+		system("sudo shutdown -h now");
+	}
+#endif
 	
 	posMan.update();
 }

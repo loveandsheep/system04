@@ -26,6 +26,8 @@ void positioner::setup()
 	//	ev_tension();
 #ifndef TARGET_OSX
 	pinMode(ADC_SS_PIN, OUTPUT);
+	pinMode(EMERGE_BUTTON_PIN, INPUT);
+	pullUpDnControl(EMERGE_BUTTON_PIN, PUD_UP);
 #endif
 
 	calibAnalog = getAnalog(7);
