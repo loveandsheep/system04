@@ -22,6 +22,11 @@ void ofxKsmrRPiToL6470::setup(bool callGPIOSetup, int numMotor)
 	}
 	pinMode(RPI_L6470_SS_PIN, OUTPUT);
 	digitalWrite(RPI_L6470_SS_PIN, 1);
+	
+	pullUpDnControl( 9, PUD_UP);
+	pullUpDnControl(10, PUD_UP);
+	pullUpDnControl(11, PUD_UP);
+	
 #endif
 	
 	motorFlg.assign(numMotor, false);
