@@ -20,9 +20,11 @@ void ofApp::setup(){
 	
 	isParent = (dir.getFiles().size() > 0);
 	manual = !isParent;
-	child.setup(CHILD_ADDR, 12400);
 	
-	logger.setup("Cotswold.local", isParent ? 12800 : 12700);
+	child.setup(CHILD_ADDR, 12400);
+	cout << "Child setup succeed" << endl;
+	
+	logger.setup("192.168.2.124", isParent ? 12800 : 12700);
 }
 
 void ofApp::resetMotorCommand()
