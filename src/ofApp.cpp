@@ -105,6 +105,7 @@ void ofApp::update(){
 		{
 			motor.resetDevice();
 			system("sudo shutdown -h now");
+			manual = true;
 		}
 	}
 	
@@ -152,6 +153,7 @@ void ofApp::update(){
 		
 		motor.resetDevice();
 		system("sudo shutdown -h now");
+		manual = true;
 	}
 #endif
 	
