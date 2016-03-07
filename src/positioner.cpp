@@ -91,6 +91,11 @@ void positioner::update()
 		case PHASE_SEARCH:
 			if (ofGetFrameNum() % 120 == 0)
 			{
+				if (search_forceCount > 20)
+				{
+					ev_sustain();
+				}
+				
 				if ((abs(currentAnalog - calibAnalog) < 2) &&
 					(search_forceCount > 5))
 				{
