@@ -49,9 +49,11 @@ public:
 	
 	ofxOscSender child;
 	ofxOscSender logger;
+	bool useLogger;
 	
 	void sendLog(string address, ofVec3f val)
 	{
+		if (!useLogger) return;
 		ofxOscMessage m;
 		m.setAddress(address);
 		m.addFloatArg(val.x);
@@ -62,6 +64,7 @@ public:
 	
 	void sendLog(string address, float val)
 	{
+		if (!useLogger) return;
 		ofxOscMessage m;
 		m.setAddress(address);
 		m.addFloatArg(val);

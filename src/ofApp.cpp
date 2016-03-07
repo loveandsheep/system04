@@ -23,8 +23,9 @@ void ofApp::setup(){
 	
 	child.setup(CHILD_ADDR, 12400);
 	cout << "Child setup succeed" << endl;
-	
-	logger.setup("192.168.2.124", isParent ? 12800 : 12700);
+
+	useLogger = false;
+	if (useLogger) logger.setup("192.168.2.124", isParent ? 12800 : 12700);
 }
 
 void ofApp::resetMotorCommand()
