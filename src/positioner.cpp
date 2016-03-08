@@ -94,6 +94,7 @@ void positioner::update()
 				if (search_forceCount > 20)
 				{
 					ev_sustain();
+					break;
 				}
 				
 				if ((abs(currentAnalog - calibAnalog) < 2) &&
