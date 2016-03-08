@@ -12,14 +12,6 @@ void positioner::setup()
 {
 	scServer = ofPtr<ofxSCServer>(new ofxSCServer(CHILD_ADDR, 57110));
 
-
-	ofxOscMessage m;
-	m.setAddress("/g_new");
-	m.addIntArg(1);
-	m.addIntArg(0);//position
-	m.addIntArg(0);//group ID
-	scServer->sendMsg(m);
-
 	calibAnalog = 900;
 	phase = PHASE_TENSION;
 
@@ -38,6 +30,26 @@ void positioner::setup()
 
 void positioner::update()
 {
+	if (ofGetFrameNum() == 60)
+	{
+		ofxOscMessage m;
+		m.setAddress("/g_new");
+		m.addIntArg(1);
+		m.addIntArg(0);//position
+		m.addIntArg(0);//group ID
+		scServer->sendMsg(m);
+	}
+	
+	if (ofGetFrameNum() % (60 * 120))
+	{
+		ofxOscMessage m;
+		m.setAddress("/g_new");
+		m.addIntArg(1);
+		m.addIntArg(0);//position
+		m.addIntArg(0);//group ID
+		scServer->sendMsg(m);
+	}
+	
 	noiseVal = ofSignedNoise(analog_smooth / 100.0,
 							 currentMotor[0] / 100.0,
 							 currentMotor[1] / 100.0,
