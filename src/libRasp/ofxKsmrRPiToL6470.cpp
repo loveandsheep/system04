@@ -141,7 +141,7 @@ void ofxKsmrRPiToL6470::spiOpen()
 {
 #ifndef TARGET_OSX
 	digitalWrite(RPI_L6470_SS_PIN, 0);
-	usleep(10000);
+	usleep(20000);
 #endif
 	if (verbose) std::cout << "===Open===" << ofGetFrameNum() << std::endl;
 }
